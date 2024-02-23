@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import app.entity.Autor;
 import app.entity.Biblioteca;
+import app.entity.Livro;
 
 @Service
 public class BibliotecaService {
@@ -46,5 +47,15 @@ public class BibliotecaService {
 				return biblioteca;
 		}
 		return null;
+	}
+
+	public boolean delete(int id) {
+		for(Biblioteca biblioteca : this.lista) {
+			if(biblioteca.getId()==id) {
+				this.lista.remove(biblioteca);
+				return true;
+			}
+		}
+		return false;
 	}
 }

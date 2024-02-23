@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import app.entity.Autor;
+import app.entity.Livro;
 
 @Service
 public class AutorService {
@@ -45,6 +46,16 @@ public class AutorService {
 				return autor;
 		}
 		return null;
+	}
+
+	public boolean delete(int id) {
+		for(Autor autor : this.lista) {
+			if(autor.getId()==id) {
+				this.lista.remove(autor);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

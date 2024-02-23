@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import app.entity.Autor;
 import app.entity.Biblioteca;
 import app.entity.Editora;
+import app.entity.Livro;
 
 @Service
 public class EditoraService {
@@ -47,5 +48,15 @@ public class EditoraService {
 				return editora;
 		}
 		return null;
+	}
+
+	public boolean delete(int id) {
+		for(Editora editora : this.lista) {
+			if(editora.getId()==id) {
+				this.lista.remove(editora);
+				return true;
+			}
+		}
+		return false;
 	}
 }

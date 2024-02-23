@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import app.entity.Autor;
 import app.entity.Livro;
 
 @Service
@@ -44,5 +45,9 @@ public class LivroService {
 				"Um clássico de Antoine de Saint-Exupéry sobre a amizade e a busca pelo significado da vida.", 1943,
 				96);
 		this.lista.add(livro10);
+	}
+	
+	public List<Livro> listall() {
+		return this.lista;
 	}
 }

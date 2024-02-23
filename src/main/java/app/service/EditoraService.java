@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import app.entity.Autor;
 import app.entity.Editora;
 
 @Service
@@ -33,5 +34,9 @@ public class EditoraService {
 		this.lista.add(editora9);
 		Editora editora10 = new Editora(10, "Editora Virtual", "Av. Virtual, 234", "567890123");
 		this.lista.add(editora10);
+	}
+	
+	public List<Editora> listall() {
+		return this.lista;
 	}
 }

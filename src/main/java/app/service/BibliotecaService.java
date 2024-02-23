@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import app.entity.Autor;
 import app.entity.Biblioteca;
 
 @Service
@@ -33,5 +34,9 @@ public class BibliotecaService {
 		this.lista.add(biblioteca9);
 		Biblioteca biblioteca10 = new Biblioteca(10, "Biblioteca Virtual", "567890123");
 		this.lista.add(biblioteca10);
+	}
+	
+	public List<Biblioteca> listall() {
+		return this.lista;
 	}
 }

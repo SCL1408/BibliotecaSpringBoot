@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import app.entity.Autor;
+import app.entity.Biblioteca;
 import app.entity.Editora;
 
 @Service
@@ -38,5 +39,13 @@ public class EditoraService {
 	
 	public List<Editora> listall() {
 		return this.lista;
+	}
+
+	public Editora findById(int id) {
+		for (Editora editora : this.lista) {
+			if (editora.getId() == id)
+				return editora;
+		}
+		return null;
 	}
 }

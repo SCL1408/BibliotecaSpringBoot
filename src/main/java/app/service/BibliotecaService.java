@@ -39,4 +39,12 @@ public class BibliotecaService {
 	public List<Biblioteca> listall() {
 		return this.lista;
 	}
+
+	public Biblioteca findById(int id) {
+		for (Biblioteca biblioteca : this.lista) {
+			if (biblioteca.getId() == id)
+				return biblioteca;
+		}
+		return null;
+	}
 }

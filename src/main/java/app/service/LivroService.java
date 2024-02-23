@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import app.entity.Autor;
 import app.entity.Livro;
 
 @Service
@@ -49,5 +48,13 @@ public class LivroService {
 	
 	public List<Livro> listall() {
 		return this.lista;
+	}
+
+	public Livro findById(int id) {
+			for(Livro livro : this.lista) {
+				if(livro.getId()==id)
+					return livro;
+			}
+		return null;
 	}
 }

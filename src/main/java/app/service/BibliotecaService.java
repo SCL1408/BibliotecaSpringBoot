@@ -58,4 +58,10 @@ public class BibliotecaService {
 		}
 		return false;
 	}
+
+	public boolean save(Biblioteca biblioteca) {
+		if (this.lista.add(biblioteca))
+			return true;
+		return false;
+	}
 }

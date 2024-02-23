@@ -58,4 +58,10 @@ public class AutorService {
 		return false;
 	}
 
+	public boolean save(Autor autor) {
+		if (this.lista.add(autor))
+			return true;
+		return false;
+	}
+
 }

@@ -59,4 +59,10 @@ public class EditoraService {
 		}
 		return false;
 	}
+
+	public boolean save(Editora editora) {
+		if (this.lista.add(editora))
+			return true;
+		return false;
+	}
 }

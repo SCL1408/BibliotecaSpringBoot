@@ -59,12 +59,18 @@ public class LivroService {
 	}
 
 	public boolean delete(int id) {
-		for(Livro livro : this.lista) {
-			if(livro.getId()==id) {
+		for (Livro livro : this.lista) {
+			if (livro.getId() == id) {
 				this.lista.remove(livro);
 				return true;
 			}
 		}
+		return false;
+	}
+
+	public boolean save(Livro livro) {
+		if (this.lista.add(livro))
+			return true;
 		return false;
 	}
 }

@@ -45,16 +45,26 @@ public class LivroService {
 				96);
 		this.lista.add(livro10);
 	}
-	
+
 	public List<Livro> listall() {
 		return this.lista;
 	}
 
 	public Livro findById(int id) {
-			for(Livro livro : this.lista) {
-				if(livro.getId()==id)
-					return livro;
-			}
+		for (Livro livro : this.lista) {
+			if (livro.getId() == id)
+				return livro;
+		}
 		return null;
+	}
+
+	public boolean delete(int id) {
+		for(Livro livro : this.lista) {
+			if(livro.getId()==id) {
+				this.lista.remove(livro);
+				return true;
+			}
+		}
+		return false;
 	}
 }

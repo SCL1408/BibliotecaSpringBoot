@@ -73,4 +73,24 @@ public class LivroService {
 			return true;
 		return false;
 	}
+	
+	public boolean update(int id, Livro novoLivro) {
+		Livro livro = new Livro();
+		int index;
+		
+		livro = findById(id);
+		if(livro==null)
+			return false;
+		
+		index = this.lista.indexOf(livro);
+
+		this.lista.get(index).setAno(novoLivro.getAno());
+		this.lista.get(index).setId(novoLivro.getId());
+		this.lista.get(index).setNumeroPaginas(novoLivro.getNumeroPaginas());
+		this.lista.get(index).setIssn(novoLivro.getIssn());
+		this.lista.get(index).setSinopse(novoLivro.getSinopse());
+		this.lista.get(index).setTitulo(novoLivro.getTitulo());
+		
+		return true;
+	}
 }

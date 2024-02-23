@@ -35,4 +35,8 @@ public class AutorService {
 		Autor autor10 = new Autor(10, "Lucas Martins", "56789012300", 38);
 		this.lista.add(autor10);
 	}
+
+	public List<Autor> listall() {
+		return this.lista;
+	}
 }

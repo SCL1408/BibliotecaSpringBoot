@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import app.entity.Autor;
 import app.entity.Biblioteca;
-import app.entity.Livro;
 
 @Service
 public class BibliotecaService {
@@ -63,5 +61,22 @@ public class BibliotecaService {
 		if (this.lista.add(biblioteca))
 			return true;
 		return false;
+	}
+	
+	public boolean update(int id, Biblioteca novoBiblioteca) {
+		Biblioteca biblioteca = new Biblioteca();
+		int index;
+		
+		biblioteca = findById(id);
+		if(biblioteca==null)
+			return false;
+		
+		index = this.lista.indexOf(biblioteca);
+
+		this.lista.get(index).setId(novoBiblioteca.getId());
+		this.lista.get(index).setNome(novoBiblioteca.getNome());
+		this.lista.get(index).setTelefone(novoBiblioteca.getTelefone());
+		
+		return true;
 	}
 }

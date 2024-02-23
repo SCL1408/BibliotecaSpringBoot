@@ -26,7 +26,7 @@ public class LivroController {
 	@GetMapping("/listall")
 	public ResponseEntity<List<Livro>> listall(){
 		try {
-			return new ResponseEntity<List<Livro>>(this.livroService.listall(), HttpStatus.CREATED);
+			return new ResponseEntity<List<Livro>>(this.livroService.listall(), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}

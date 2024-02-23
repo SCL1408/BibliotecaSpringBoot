@@ -5,10 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import app.entity.Autor;
-import app.entity.Biblioteca;
 import app.entity.Editora;
-import app.entity.Livro;
 
 @Service
 public class EditoraService {
@@ -64,5 +61,23 @@ public class EditoraService {
 		if (this.lista.add(editora))
 			return true;
 		return false;
+	}
+	
+	public boolean update(int id, Editora novoEditora) {
+		Editora editora = new Editora();
+		int index;
+		
+		editora = findById(id);
+		if(editora==null)
+			return false;
+		
+		index = this.lista.indexOf(editora);
+
+		this.lista.get(index).setId(novoEditora.getId());
+		this.lista.get(index).setNome(novoEditora.getNome());
+		this.lista.get(index).setEndereco(novoEditora.getEndereco());
+		this.lista.get(index).setTelefone(novoEditora.getTelefone());
+		
+		return true;
 	}
 }

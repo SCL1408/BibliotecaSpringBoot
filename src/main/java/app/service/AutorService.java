@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import app.entity.Autor;
-import app.entity.Livro;
 
 @Service
 public class AutorService {
@@ -62,6 +61,24 @@ public class AutorService {
 		if (this.lista.add(autor))
 			return true;
 		return false;
+	}
+	
+	public boolean update(int id, Autor novoAutor) {
+		Autor autor = new Autor();
+		int index;
+		
+		autor = findById(id);
+		if(autor==null)
+			return false;
+		
+		index = this.lista.indexOf(autor);
+
+		this.lista.get(index).setId(novoAutor.getId());
+		this.lista.get(index).setNome(novoAutor.getNome());
+		this.lista.get(index).setCpf(novoAutor.getCpf());
+		this.lista.get(index).setIdade(novoAutor.getIdade());
+		
+		return true;
 	}
 
 }

@@ -22,59 +22,56 @@ import app.service.BibliotecaService;
 public class BibliotecaController {
 	@Autowired
 	public BibliotecaService bibliotecaService;
-	
+
 	@GetMapping("/listall")
-	public ResponseEntity<List<Biblioteca>> listall(){
+	public ResponseEntity<List<Biblioteca>> listall() {
 		try {
 			return new ResponseEntity<List<Biblioteca>>(this.bibliotecaService.listall(), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping("/findById/{id}")
-	public ResponseEntity<Biblioteca> findById(@PathVariable int id){
+	public ResponseEntity<Biblioteca> findById(@PathVariable int id) {
 		try {
 			Biblioteca biblioteca = this.bibliotecaService.findById(id);
-			if(biblioteca!=null)
+			if (biblioteca != null)
 				return new ResponseEntity<Biblioteca>(biblioteca, HttpStatus.FOUND);
 			else
 				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);		}
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 	}
-	
+
 	@DeleteMapping("delete/{id}")
-	public ResponseEntity<String> delete(@PathVariable int id){
+	public ResponseEntity<String> delete(@PathVariable int id) {
 		try {
-			if(this.bibliotecaService.delete(id))
-				return new ResponseEntity<String>("Registro deletado com sucesso", HttpStatus.FOUND);
-			else
-				return new ResponseEntity<String>("Não foi possível encontrar o item", HttpStatus.NOT_FOUND);
+			this.bibliotecaService.delete(id);
+			return new ResponseEntity<String>("Registro deletado com sucesso", HttpStatus.FOUND);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("Erro: "+e, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Erro: " + e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PostMapping("/save")
-	public ResponseEntity<String> save(@RequestBody Biblioteca biblioteca){
+	public ResponseEntity<String> save(@RequestBody Biblioteca biblioteca) {
 		try {
-			if(this.bibliotecaService.save(biblioteca))
-				return new ResponseEntity<String>("Registro criado com sucesso", HttpStatus.CREATED);
-			return new ResponseEntity<String>("Não foi possível encontrar o item", HttpStatus.BAD_REQUEST);
+			this.bibliotecaService.save(biblioteca);
+			return new ResponseEntity<String>("Registro criado com sucesso", HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("Erro: "+e, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Erro: " + e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PutMapping("/update/{id}")
-	public ResponseEntity<String> update(@PathVariable int id, @RequestBody Biblioteca novoBiblioteca){
+	public ResponseEntity<String> update(@PathVariable int id, @RequestBody Biblioteca novoBiblioteca) {
 		try {
-			if(this.bibliotecaService.update(id, novoBiblioteca))
-				return new ResponseEntity<String>("Registro alterado com sucesso", HttpStatus.OK);
-			return new ResponseEntity<String>("Não foi possível encontrar o item", HttpStatus.BAD_REQUEST);
+			this.bibliotecaService.update(id, novoBiblioteca);
+			return new ResponseEntity<String>("Registro alterado com sucesso", HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("Erro: "+e, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Erro: " + e, HttpStatus.BAD_REQUEST);
 		}
 	}
 }

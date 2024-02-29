@@ -22,59 +22,56 @@ import app.service.AutorService;
 public class AutorController {
 	@Autowired
 	public AutorService autorService;
-	
+
 	@GetMapping("/listall")
-	public ResponseEntity<List<Autor>> listall(){
+	public ResponseEntity<List<Autor>> listall() {
 		try {
 			return new ResponseEntity<List<Autor>>(this.autorService.listall(), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping("/findById/{id}")
-	public ResponseEntity<Autor> findById(@PathVariable int id){
+	public ResponseEntity<Autor> findById(@PathVariable int id) {
 		try {
 			Autor autor = this.autorService.findById(id);
-			if(autor!=null)
+			if (autor != null)
 				return new ResponseEntity<Autor>(autor, HttpStatus.FOUND);
 			else
 				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);		}
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 	}
-	
+
 	@DeleteMapping("delete/{id}")
-	public ResponseEntity<String> delete(@PathVariable int id){
+	public ResponseEntity<String> delete(@PathVariable int id) {
 		try {
-			if(this.autorService.delete(id))
-				return new ResponseEntity<String>("Registro deletado com sucesso", HttpStatus.FOUND);
-			else
-				return new ResponseEntity<String>("Não foi possível encontrar o item", HttpStatus.NOT_FOUND);
+			this.autorService.delete(id);
+			return new ResponseEntity<String>("Registro deletado com sucesso", HttpStatus.FOUND);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("Erro: "+e, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Erro: " + e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PostMapping("/save")
-	public ResponseEntity<String> save(@RequestBody Autor autor){
+	public ResponseEntity<String> save(@RequestBody Autor autor) {
 		try {
-			if(this.autorService.save(autor))
-				return new ResponseEntity<String>("Registro criado com sucesso", HttpStatus.CREATED);
-			return new ResponseEntity<String>("Não foi possível encontrar o item", HttpStatus.BAD_REQUEST);
+			this.autorService.save(autor);
+			return new ResponseEntity<String>("Registro criado com sucesso", HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("Erro: "+e, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Erro: " + e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PutMapping("/update/{id}")
-	public ResponseEntity<String> update(@PathVariable int id, @RequestBody Autor novoAutor){
+	public ResponseEntity<String> update(@PathVariable int id, @RequestBody Autor novoAutor) {
 		try {
-			if(this.autorService.update(id, novoAutor))
-				return new ResponseEntity<String>("Registro alterado com sucesso", HttpStatus.OK);
-			return new ResponseEntity<String>("Não foi possível encontrar o item", HttpStatus.BAD_REQUEST);
+			this.autorService.update(id, novoAutor);
+			return new ResponseEntity<String>("Registro alterado com sucesso", HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>("Erro: "+e, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Erro: " + e, HttpStatus.BAD_REQUEST);
 		}
 	}
 }

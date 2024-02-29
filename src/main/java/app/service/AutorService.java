@@ -1,84 +1,36 @@
 package app.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.entity.Autor;
+import app.repository.AutorRepository;
 
 @Service
 public class AutorService {
-	private List<Autor> lista;
-
-	public AutorService() {
-		this.lista = new ArrayList<Autor>();
-		Autor autor1 = new Autor(1, "Pedro João", "12345678900", 25);
-		this.lista.add(autor1);
-		Autor autor2 = new Autor(2, "Ana Silva", "98765432100", 30);
-		this.lista.add(autor2);
-		Autor autor3 = new Autor(3, "Carlos Souza", "45678912300", 40);
-		this.lista.add(autor3);
-		Autor autor4 = new Autor(4, "Mariana Oliveira", "78912345600", 28);
-		this.lista.add(autor4);
-		Autor autor5 = new Autor(5, "José Santos", "23456789000", 35);
-		this.lista.add(autor5);
-		Autor autor6 = new Autor(6, "Luiza Costa", "87654321000", 45);
-		this.lista.add(autor6);
-		Autor autor7 = new Autor(7, "Fernando Pereira", "34567891200", 33);
-		this.lista.add(autor7);
-		Autor autor8 = new Autor(8, "Amanda Rodrigues", "67891234500", 27);
-		this.lista.add(autor8);
-		Autor autor9 = new Autor(9, "Rafaela Nunes", "90123456700", 32);
-		this.lista.add(autor9);
-		Autor autor10 = new Autor(10, "Lucas Martins", "56789012300", 38);
-		this.lista.add(autor10);
-	}
-
+	@Autowired
+	private AutorRepository autorRepository;
+	
 	public List<Autor> listall() {
-		return this.lista;
+		return this.autorRepository.findAll();
 	}
 
-	public Autor findById(int id) {
-		for (Autor autor : this.lista) {
-			if (autor.getId() == id)
-				return autor;
-		}
-		return null;
+	public Autor findById(long id) {
+		return this.autorRepository.findById(id).get();
 	}
 
-	public boolean delete(int id) {
-		for(Autor autor : this.lista) {
-			if(autor.getId()==id) {
-				this.lista.remove(autor);
-				return true;
-			}
-		}
-		return false;
+	public void delete(long id) {
+		this.autorRepository.deleteById(id);
 	}
 
-	public boolean save(Autor autor) {
-		if (this.lista.add(autor))
-			return true;
-		return false;
+	public void save(Autor autor) {
+		this.autorRepository.save(autor);
 	}
 	
-	public boolean update(int id, Autor novoAutor) {
-		Autor autor = new Autor();
-		int index;
-		
-		autor = findById(id);
-		if(autor==null)
-			return false;
-		
-		index = this.lista.indexOf(autor);
-
-		this.lista.get(index).setId(novoAutor.getId());
-		this.lista.get(index).setNome(novoAutor.getNome());
-		this.lista.get(index).setCpf(novoAutor.getCpf());
-		this.lista.get(index).setIdade(novoAutor.getIdade());
-		
-		return true;
+	public void update(long id, Autor novoAutor) {
+		novoAutor.setId(id);
+		this.autorRepository.save(novoAutor);
 	}
-
 }

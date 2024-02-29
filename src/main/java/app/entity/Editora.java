@@ -18,7 +18,7 @@ import lombok.Setter;
 public class Editora {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	@NotNull(message = "Este campo não pode ser nulo (nome)")
 	private String nome;
 	@NotNull(message = "Este campo não pode ser nulo (nome)")

@@ -1,82 +1,36 @@
 package app.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.entity.Biblioteca;
+import app.repository.BibliotecaRepository;
 
 @Service
 public class BibliotecaService {
-	private List<Biblioteca> lista;
-
-	public BibliotecaService() {
-		this.lista = new ArrayList<Biblioteca>();
-		Biblioteca biblioteca1 = new Biblioteca(1, "Biblioteca Central", "123456789");
-		this.lista.add(biblioteca1);
-		Biblioteca biblioteca2 = new Biblioteca(2, "Biblioteca Municipal", "987654321");
-		this.lista.add(biblioteca2);
-		Biblioteca biblioteca3 = new Biblioteca(3, "Biblioteca Universitária", "456789123");
-		this.lista.add(biblioteca3);
-		Biblioteca biblioteca4 = new Biblioteca(4, "Biblioteca Infantil", "789123456");
-		this.lista.add(biblioteca4);
-		Biblioteca biblioteca5 = new Biblioteca(5, "Biblioteca Pública", "234567890");
-		this.lista.add(biblioteca5);
-		Biblioteca biblioteca6 = new Biblioteca(6, "Biblioteca Escolar", "876543210");
-		this.lista.add(biblioteca6);
-		Biblioteca biblioteca7 = new Biblioteca(7, "Biblioteca Digital", "345678912");
-		this.lista.add(biblioteca7);
-		Biblioteca biblioteca8 = new Biblioteca(8, "Biblioteca Nacional", "678912345");
-		this.lista.add(biblioteca8);
-		Biblioteca biblioteca9 = new Biblioteca(9, "Biblioteca Comunitária", "901234567");
-		this.lista.add(biblioteca9);
-		Biblioteca biblioteca10 = new Biblioteca(10, "Biblioteca Virtual", "567890123");
-		this.lista.add(biblioteca10);
-	}
+	@Autowired
+	private BibliotecaRepository bibliotecaRepository;
 	
 	public List<Biblioteca> listall() {
-		return this.lista;
+		return this.bibliotecaRepository.findAll();
 	}
 
-	public Biblioteca findById(int id) {
-		for (Biblioteca biblioteca : this.lista) {
-			if (biblioteca.getId() == id)
-				return biblioteca;
-		}
-		return null;
+	public Biblioteca findById(long id) {
+		return this.bibliotecaRepository.findById(id).get();
 	}
 
-	public boolean delete(int id) {
-		for(Biblioteca biblioteca : this.lista) {
-			if(biblioteca.getId()==id) {
-				this.lista.remove(biblioteca);
-				return true;
-			}
-		}
-		return false;
+	public void delete(long id) {
+		this.bibliotecaRepository.deleteById(id);
 	}
 
-	public boolean save(Biblioteca biblioteca) {
-		if (this.lista.add(biblioteca))
-			return true;
-		return false;
+	public void save(Biblioteca biblioteca) {
+		this.bibliotecaRepository.save(biblioteca);
 	}
 	
-	public boolean update(int id, Biblioteca novoBiblioteca) {
-		Biblioteca biblioteca = new Biblioteca();
-		int index;
-		
-		biblioteca = findById(id);
-		if(biblioteca==null)
-			return false;
-		
-		index = this.lista.indexOf(biblioteca);
-
-		this.lista.get(index).setId(novoBiblioteca.getId());
-		this.lista.get(index).setNome(novoBiblioteca.getNome());
-		this.lista.get(index).setTelefone(novoBiblioteca.getTelefone());
-		
-		return true;
+	public void update(long id, Biblioteca novoBiblioteca) {
+		novoBiblioteca.setId(id);
+		this.bibliotecaRepository.save(novoBiblioteca);
 	}
 }

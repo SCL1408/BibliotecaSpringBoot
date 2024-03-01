@@ -29,19 +29,19 @@ public class Livro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotNull(message = "Este campo não pode ser nulo (nome)")
+	@NotNull(message = "Este campo não pode ser nulo (issn)")
 	private String issn;
 	
-	@NotNull(message = "Este campo não pode ser nulo (nome)")
+	@NotNull(message = "Este campo não pode ser nulo (titulo)")
 	private String titulo;
 	
-	@NotNull(message = "Este campo não pode ser nulo (nome)")
+	@NotNull(message = "Este campo não pode ser nulo (sinopse)")
 	private String sinopse;
 	
-	@NotNull(message = "Este campo não pode ser nulo (nome)")
+	@NotNull(message = "Este campo não pode ser nulo (ano)")
 	private int ano;
 	
-	@NotNull(message = "Este campo não pode ser nulo (nome)")
+	@NotNull(message = "Este campo não pode ser nulo (numero de paginas)")
 	private int numeroPaginas;
 	
 	@ManyToOne(cascade = CascadeType.ALL)

@@ -85,10 +85,19 @@ public class LivroController {
 		}
 	}
 	
-	@GetMapping("findByEditora")
+	@GetMapping("/findByEditora")
 	public ResponseEntity<List<Livro>> findByEditora(@RequestParam long idEditora){
 		try {
 			return new ResponseEntity<List<Livro>>(this.livroService.findByMarca(idEditora), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByBibliotecas")
+	public ResponseEntity<List<Livro>> findByBibliotecas(@RequestParam long idBiblioteca){
+		try {
+			return new ResponseEntity<List<Livro>>(this.livroService.findByBibliotecas(idBiblioteca), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}

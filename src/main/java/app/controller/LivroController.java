@@ -84,4 +84,13 @@ public class LivroController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping("findByEditora")
+	public ResponseEntity<List<Livro>> findByEditora(@RequestParam long idEditora){
+		try {
+			return new ResponseEntity<List<Livro>>(this.livroService.findByMarca(idEditora), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
 }

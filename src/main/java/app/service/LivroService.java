@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import app.entity.Editora;
 import app.entity.Livro;
 import app.repository.LivroRepository;
 
@@ -36,5 +37,11 @@ public class LivroService {
 
 	public List<Livro> findByNome(String titulo) {
 		return this.livroRepository.findByTitulo(titulo);
+	}
+
+	public List<Livro> findByMarca(long idEditora) {
+		Editora editora = new Editora();
+		editora.setId(idEditora);
+		return this.livroRepository.findByEditora(editora);
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.entity.Livro;
@@ -72,6 +73,15 @@ public class LivroController {
 			return new ResponseEntity<String>("Registro alterado com sucesso", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>("Erro: " + e, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/findByTitulo")
+	public ResponseEntity<List<Livro>> findByNome(@RequestParam String titulo){
+		try {
+			return new ResponseEntity<List<Livro>>(this.livroService.findByNome(titulo), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 }

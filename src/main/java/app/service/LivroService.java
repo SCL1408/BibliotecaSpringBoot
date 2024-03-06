@@ -33,4 +33,8 @@ public class LivroService {
 		novoLivro.setId(id);
 		this.livroRepository.save(novoLivro);
 	}
+
+	public List<Livro> findByNome(String titulo) {
+		return this.livroRepository.findByTitulo(titulo);
+	}
 }
